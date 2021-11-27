@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 //@RequestMapping("/demo")
 public class GreetingController {
 
-	private static ArrayList<String> moto;
-	private static List<ArrayList<String>> motos = new ArrayList<>();
-	private static ArrayList<Greeting> motos2;
+	public static ArrayList<String> moto;
+	public static List<ArrayList<String>> motos = new ArrayList<>();
+	public static ArrayList<Greeting> motos2;
 
 	public GreetingController(){
 		moto = new ArrayList<String>();
@@ -46,7 +46,7 @@ public class GreetingController {
 	
 
 	@GetMapping("/getMoto")
-	public ArrayList<Greeting> greeting(@RequestParam(value = "id", defaultValue = "null") String id,
+	public ArrayList<Greeting> get(@RequestParam(value = "id", defaultValue = "null") String id,
 											@RequestParam(value = "marca", defaultValue = "null") String marca,
 											@RequestParam(value = "nombre", defaultValue = "null") String nombre,
 											@RequestParam(value = "year", defaultValue = "null") String year,

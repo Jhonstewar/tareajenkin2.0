@@ -17,6 +17,7 @@ public class Greeting {
 
 	}
 
+
 	public String getId() {
 		return id;
 	}
@@ -33,4 +34,6 @@ public class Greeting {
 	public String getColor() {
 		return color;
 	}
+	
+	
 }
