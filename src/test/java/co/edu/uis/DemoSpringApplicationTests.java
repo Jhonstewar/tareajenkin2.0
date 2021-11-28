@@ -63,20 +63,12 @@ class DemoSpringApplicationTests {
 
 		ArrayList<Greeting> motos = new ArrayList<>(); 
 		motos = classmoto.mostrar("null");
-
+       
         classmoto.deletear("04");
 		
         
         motos = classmoto.mostrar("null");
 
-        for(Greeting moto: motos){
-            System.out.println(moto.getId());
-            System.out.println(moto.getMarca());
-            System.out.println(moto.getNombre());
-            System.out.println(moto.getYear());
-            System.out.println(moto.getColor());
-            System.out.println("------------------------------------------");
-        }
 
         ArrayList<Greeting> motos2 = new ArrayList<>();
 
