@@ -2,7 +2,7 @@ package co.edu.uis;
 
 public class Moto {
 
-	private final String id;
+	private String id;
 	private String marca;
 	private String nombre;
 	private String year;
