@@ -1,6 +1,8 @@
 package co.edu.uis;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,28 +14,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 //@RequestMapping("/demo")
-public class MotoController {
+public class GreetingController {
 
-	private static Moto moto;
-	private static ArrayList<Moto> motos = new ArrayList<>();
+	private static ArrayList<String> moto;
+	private static List<ArrayList<String>> motos = new ArrayList<>();
+	private static ArrayList<Greeting> motos2;
 	
 
 	@GetMapping("/getMoto")
-	public ArrayList<Moto> mostrar(@RequestParam(value = "id", defaultValue = "null") String id) {
-	ArrayList<Moto> motos2 = new ArrayList<>();
-			if (id != "null") {
-				for(Moto moto: motos){
-					if (moto.getId() == id) {
-						motos2.add(new Moto(moto.getId(), moto.getMarca(), moto.getNombre(), moto.getYear(), moto.getColor()));
+	public ArrayList<Greeting> mostrar(@RequestParam(value = "id", defaultValue = "null") String id) {
+	motos2 = new ArrayList<>();
+			if (!id.equals("null")) {
+				for(ArrayList<String> moto: motos){
+					if (moto.contains(id)) {
+						motos2.add(new Greeting(moto.get(0), moto.get(1), moto.get(2), moto.get(3), moto.get(4)));
 					}
 				}
 				return motos2;
 			}
-			for(Moto moto: motos){
-				motos2.add(new Moto(moto.getId(), moto.getMarca(), moto.getNombre(), moto.getYear(), moto.getColor()));
+			for(ArrayList<String> moto: motos){
+				motos2.add(new Greeting(moto.get(0), moto.get(1), moto.get(2), moto.get(3), moto.get(4)));
 			}
 			return motos2;
 	}
+
 	// aqui se crean las motos
 
 	@PostMapping("/addMoto")
@@ -43,7 +47,13 @@ public class MotoController {
 						@RequestParam String year,
 						@RequestParam String color){
 
-		moto = new Moto(id, marca, nombre, year, color);
+		moto = new ArrayList<String>();
+
+		moto.add(id);
+		moto.add(marca);
+		moto.add(nombre);
+		moto.add(year);
+		moto.add(color);
 
 		motos.add(moto);
 	}
@@ -56,16 +66,14 @@ public class MotoController {
 	@RequestParam String color)
 	{
 		
-		int i = 0;
-		for(Moto moto: motos){
-			if (moto.getId()==id) {
-				moto.setMarca(marca);
-				moto.setNombre(nombre);
-				moto.setYear(year);
-				moto.setColor(color);
-				motos.set(i, moto);
+		for(ArrayList<String> moto: motos){
+			if (moto.contains(id)) {
+				moto.set(1,marca);
+				moto.set(2,nombre);
+				moto.set(3,year);
+				moto.set(4,color);
 			}
-			i++;
+			
 		}
 
 	}
@@ -73,10 +81,12 @@ public class MotoController {
 	@DeleteMapping("/deleteMoto")
 	public void deletear(@RequestParam String id)
 	{
-		for(Moto moto: motos){
+		int i=0;
+		for(Greeting moto: motos2){
 			if (moto.getId().equals(id)) {
-				motos.remove(moto);
+				motos.remove(i);
 			}
+			i++;
 			
 		}
 	}
